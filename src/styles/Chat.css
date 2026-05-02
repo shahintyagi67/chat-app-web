@@ -23,6 +23,7 @@ body {
 
 
 .chat-layout {
+   overflow: visible;
   width: 98%;
   max-width: 1600px;
   height: 97vh;
@@ -413,6 +414,10 @@ body {
   background: #1f2937;
   color: #f9fafb;
 }
+.chat-left,
+.chat-right {
+  border-radius: 0;
+}
 
 /* Push settings to bottom */
 .sidebar-settings {
@@ -459,9 +464,9 @@ body {
 .settings-dropdown-bottom div:hover {
   background: #374151;
 }
-.emoji-container {
+/* .emoji-container {
   position: relative;
-}
+} */
 
 /* .emoji-picker {
   position: absolute;
@@ -475,11 +480,23 @@ body {
   right: 20px;
   z-index: 1000;
 } */
+ /* .emoji-picker {
+  position: absolute;
+  bottom: 70px;  
+  right: 60px;   
+  z-index: 9999;
+} */
  .emoji-picker {
   position: absolute;
-  bottom: 70px;   /* thoda upar */
-  right: 60px;    /* input ke near */
+  bottom: 50px;
+  right: 0;
   z-index: 9999;
+}
+
+.emoji-container {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 /* Hide emoji category navigation (blue boxes) */
 .epr-category-nav {
