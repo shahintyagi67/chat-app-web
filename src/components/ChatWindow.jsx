@@ -4,6 +4,7 @@ import "../styles/Chat.css";
 import EmojiPicker from "emoji-picker-react";
 import API from "../services/api";
 
+
 const ChatWindow = ({
   user,
   selectedUser,
@@ -37,6 +38,7 @@ const ChatWindow = ({
     if (!selectedUser || !text.trim()) return;
 
     const newMsg = { senderId: user._id, message: text };
+    console.log(newMsg,'new msg')
 
     socket.emit("send-message", {
       senderId: user._id,
@@ -55,6 +57,19 @@ const ChatWindow = ({
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+
+ useEffect(() => {
+  socket.connect(); 
+
+  socket.on("connect", () => {
+    console.log(socket.id, "connected ------------------");
+  });
+
+  return () => {
+    socket.off("connect");
+  };
+}, []);
 
   if (!selectedUser) {
     return <div className="chat-empty">Select a chat to start messaging</div>;
@@ -107,9 +122,9 @@ const ChatWindow = ({
 
       {/* MESSAGES */}
       <div className="chat-messages">
-        {messages.map((m) => (
+        {messages.map((m,index) => (
           <div
-            key={m._id}
+            key={m._id || index}
             className={m.senderId === user._id ? "msg me" : "msg"}
           >
             <span className="msg-text">{m.message}</span>
